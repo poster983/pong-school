@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Shape;
 import javafx.scene.shape.Path;
+import java.util.*;
+import javafx.application.Platform;
 
 public class GameWindow extends Application {
 
@@ -16,12 +18,13 @@ public class GameWindow extends Application {
     private static final int MAX_WINDOW_SIZE_X = 940;
     private static final int MAX_WINDOW_SIZE_Y = 640;
     private static final double PADDLE_MOVEMENT_SPEED = 1;//0.4
-    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //0.03
+    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.05; //0.03
     private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
     private static Paddle player2 = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
                                                                                                                                //
     private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, player2});
-
+    
+    private static Timer timer = new Timer();
 
     @Override
     public void start(Stage primaryStage) {
@@ -101,7 +104,8 @@ public class GameWindow extends Application {
         primaryStage.show();
 
         //Movement timer
-        AnimationTimer timer = new AnimationTimer() {
+        /*
+        AnimationTimer atimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
 
@@ -112,9 +116,30 @@ public class GameWindow extends Application {
 
 
                 player.moveY(py);
+                //Thread.sleep(1);
             }
+            
         };
-        timer.start();
+        atimer.start();*/
+        
+        timer.schedule(new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        
+                        double py = 0;
+
+                if (goDown) py += PADDLE_MOVEMENT_SPEED;
+                if (goUp) py += -PADDLE_MOVEMENT_SPEED;
+
+
+                player.moveY(py);
+                
+                ball.updateBall();
+                    }
+                });
+            }
+        }, 1,1);
     }
 
 

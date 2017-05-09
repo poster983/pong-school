@@ -5,4 +5,6 @@ comment1.params=
 comment1.target=javafx.scene.shape.Rectangle\ getBall()
 comment2.params=now
 comment2.target=void\ handle(long)
-numComments=3
+comment3.params=
+comment3.target=void\ updateBall()
+numComments=4
