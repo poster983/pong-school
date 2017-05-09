@@ -16,7 +16,7 @@ public class GameWindow extends Application {
     private static final int MAX_WINDOW_SIZE_X = 940;
     private static final int MAX_WINDOW_SIZE_Y = 640;
     private static final double PADDLE_MOVEMENT_SPEED = 1;//0.4
-    private static final double INITIAL_BALL_MOVEMENT_SPEED = 1; //0.03
+    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //0.03
     private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
     private static Paddle player2 = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
                                                                                                                                //
