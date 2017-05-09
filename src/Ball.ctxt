@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=_startX\ _startY\ _windowLimitsX\ _windowLimitsY\ _movementSpeed\ _paddleArray
+comment0.target=Ball(double,\ double,\ int,\ int,\ double,\ Paddle[])
+comment1.params=
+comment1.target=javafx.scene.shape.Rectangle\ getBall()
+comment2.params=now
+comment2.target=void\ handle(long)
+numComments=3

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=_x\ _y\ _windowLimits\ _movementSpeed
+comment0.target=Paddle(int,\ int,\ int,\ double)
+comment1.params=
+comment1.target=double\ getCurrX()
+comment2.params=
+comment2.target=double\ getCurrY()
+comment3.params=
+comment3.target=double\ getWidth()
+comment4.params=
+comment4.target=double\ getHeight()
+comment5.params=
+comment5.target=javafx.scene.shape.Rectangle\ getRectangle()
+comment6.params=_y
+comment6.target=void\ moveY(double)
+numComments=7
