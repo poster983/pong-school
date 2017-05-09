@@ -1,23 +1,24 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
-
+import javafx.scene.shape.Shape;
+import javafx.scene.shape.Path;
 
 public class GameWindow extends Application {
 
     private boolean goDown, goUp;
-    private final int MAX_WINDOW_SIZE_X = 940;
-    private final int MAX_WINDOW_SIZE_Y = 640;
-    private final double PADDLE_MOVEMENT_SPEED = 0.4;
-    private final double INITIAL_BALL_MOVEMENT_SPEED = 0.02;
-    private Paddle player = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
-    private Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED);
+    private static final int MAX_WINDOW_SIZE_X = 940;
+    private static final int MAX_WINDOW_SIZE_Y = 640;
+    private static final double PADDLE_MOVEMENT_SPEED = 0.4;
+    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.03;
+    private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
+    private static Paddle player2 = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
+                                                                                                                               //
+    private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, player2});
 
 
     @Override
@@ -33,9 +34,6 @@ public class GameWindow extends Application {
             }
         });
         */
-
-
-
 
 
         StackPane root = new StackPane();
@@ -65,8 +63,12 @@ public class GameWindow extends Application {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    goUp = true; break;
-                    case DOWN:  goDown = true; break;
+                    case UP:
+                        goUp = true;
+                        break;
+                    case DOWN:
+                        goDown = true;
+                        break;
                 }
             }
         });
@@ -75,11 +77,19 @@ public class GameWindow extends Application {
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    goUp = false; break;
-                    case DOWN:  goDown = false; break;
+                    case UP:
+                        goUp = false;
+                        break;
+                    case DOWN:
+                        goDown = false;
+                        break;
                 }
             }
         });
+
+
+
+
 
 
 
@@ -92,6 +102,7 @@ public class GameWindow extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+
                 double py = 0;
 
                 if (goDown) py += PADDLE_MOVEMENT_SPEED;
@@ -110,4 +121,12 @@ public class GameWindow extends Application {
         launch(args);
     }
 
+
+    //Check for Ball paddle Collision
+    public static Path checkCollision(){
+        //TODO: Add collision for left side
+        //System.out.println((Path)Shape.intersect(player.getRectangle(), ball.getBall()));
+        return (Path)Shape.intersect(player.getRectangle(), ball.getBall());
+
+    }
 }

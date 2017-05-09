@@ -31,14 +31,31 @@ public class Paddle {
         windowLimits = _windowLimits;
         movementSpeed = _movementSpeed;
     }
+
+    //Accessor Methods
+
+    public double getCurrX() {
+        return currX;
+    }
+    public double getCurrY() {
+        return currY;
+    }
+    public double getWidth() {
+        return width;
+    }
+    public double getHeight() {
+        return height;
+    }
+
+
     //gets the rectangle object
     public Rectangle getRectangle() {
         return rec;
     }
     //called from arrow key event in GameWindow.java
     public void moveY(double _y) {
-        System.out.println(-windowLimits/2);
-        System.out.println(_y);
+        //System.out.println(-windowLimits/2);
+        //System.out.println(_y);
         //Collision Checker with window
         if((((windowLimits/2)-height/2 > currY && _y == movementSpeed) || _y == -movementSpeed) && ((-windowLimits/2+height/2 < currY && _y == -movementSpeed) || _y == movementSpeed)) { //  ((windowLimits/2 < currY && _y == -movementSpeed) || _y == movementSpeed))
             currY += _y;
@@ -46,7 +63,7 @@ public class Paddle {
         }
 
 
-        System.out.println(currY);
+        //System.out.println(currY);
 
     }
 }
