@@ -48,92 +48,21 @@ public class Ball {
 
         Paddles = _paddleArray;
 
-        //start movement
-        //atimer.start();
+       
         
     }
     //gets the ball object
     public Rectangle getBall() {
         return ball;
     }
-
+    
+    public double[] getY() {
+        return location;
+    }
     // Ball clock
 
-    AnimationTimer atimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-
-                location[0] = location[0] + (velocity[0] * movementSpeed);
-                location[1] = location[1] + (velocity[1] * movementSpeed);
-                ball.setTranslateX(location[0]);
-                ball.setTranslateY(location[1]);
-
-                //Check for col with right Paddle
-                if(paddleRightX <= location[0]) {
-
-                    if (GameWindow.checkCollision().getElements().size() > 0) {
-                        //Calculate vector thingy for paddle collision detection
-                        /*
-                        double relativeIntersectY = (Paddles[0].getCurrY()+(Paddles[0].getHeight()/2)) - location[1];
-                        double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[0].getHeight()/2));
-                        double bounceAngle = normalizedRelativeIntersectionY * 75;
-                        double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) *100);
-                        double ballVy = (((movementSpeed)*-Math.sin(bounceAngle))*100);
-                        System.out.println(ballVx);
-                        System.out.println(ballVy);
-                        velocity = new double[]{ballVx, ballVy};
-                         */
-                        velocity = new double[]{-1*velocity[0], velocity[1]};
-                    }
-                }
-
-                // check for col with bottom window border
-                if(location[1] >= (windowLimits[1]/2)-size[1]) {
-                    //System.out.println(windowLimits[1]);
-                    //System.out.println(location[1]);
-                    velocity = new double[]{velocity[0], -1*velocity[1]};
-                }
-
-                // check for col with left wall
-                if(location[0] <= -1*windowLimits[0]/2) {
-                    //System.out.println(windowLimits[1]);
-                    //System.out.println(location[0]);
-                    //velocity = new double[]{-1*velocity[0], velocity[1]};
-                    ball.setTranslateX(0);
-                    ball.setTranslateY(0);
-                    location[0] = 0;
-                    location[1] = 0;
-                    velocity = new double[]{-1*velocity[0], velocity[1]};
-                }
-                // check for col with left wall QUICK TEST
-                /*if(location[0] <= 0) {
-                //System.out.println(windowLimits[1]);
-                //System.out.println(location[0]);
-                velocity = new double[]{-1*velocity[0], velocity[1]};
-                }*/
-
-                // check for col with Top window border
-                if(location[1] <= (-1*windowLimits[1]/2)+size[1]){
-                    //System.out.println(windowLimits[1]);
-                    //System.out.println(location[1]);
-                    velocity = new double[]{velocity[0], -1*velocity[1]};
-                }
-
-                // check for col with right window border
-                if(location[0] >= (windowLimits[0]/2)){
-                    //System.out.println(windowLimits[1]);
-                    //System.out.println(location[1]);
-                    ball.setTranslateX(0);
-                    ball.setTranslateY(0);
-                    location[0] = 0;
-                    location[1] = 0;
-                    velocity = new double[]{-1*velocity[0], -1*velocity[1]};
-                    //velocity = new double[]{velocity[0], velocity[1]};
-                }
-
-            }
-        };
-
+    
+    //Move ball (called vrom main clock
     public void updateBall() {
 
         //System.out.println(location[0]);
@@ -153,8 +82,14 @@ public class Ball {
                 double bounceAngle = normalizedRelativeIntersectionY * 75;
                 double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
                 double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));
+                /*
+                System.out.println("Rel intersect Y: " + relativeIntersectY);
+                System.out.println("Norm intersect Y: " + normalizedRelativeIntersectionY);
+                System.out.println("Bounce aqng: " + bounceAngle);
                 System.out.println(ballVx);
                 System.out.println(ballVy);
+                System.out.println("________ \n");
+                */
                 velocity = new double[]{ballVx, ballVy};
                  
                 //velocity = new double[]{-1*velocity[0], velocity[1]};

@@ -17,12 +17,12 @@ public class GameWindow extends Application {
     private boolean goDown, goUp;
     private static final int MAX_WINDOW_SIZE_X = 940;
     private static final int MAX_WINDOW_SIZE_Y = 640;
-    private static final double PADDLE_MOVEMENT_SPEED = 1;//0.4
+    private static final double PADDLE_MOVEMENT_SPEED = 0.5;//0.4
     private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.5; //0.03
-    private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
-    private static Paddle player2 = new Paddle(MAX_WINDOW_SIZE_X-550, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
+    private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
+    private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
                                                                                                                                //
-    private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, player2});
+    private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
     
     private static Timer timer = new Timer();
 
@@ -39,11 +39,12 @@ public class GameWindow extends Application {
             }
         });
         */
-
+       System.out.println(-MAX_WINDOW_SIZE_X/2);
 
         StackPane root = new StackPane();
         //root.getChildren().add(btn);
         root.getChildren().add(player.getRectangle());
+        root.getChildren().add(AI.getRectangle());
         root.getChildren().add(ball.getBall());
 
         Scene scene = new Scene(root, 300, 250);
@@ -134,7 +135,7 @@ public class GameWindow extends Application {
 
 
                 player.moveY(py);
-                
+                AI.update(ball.getY());
                 ball.updateBall();
                     }
                 });

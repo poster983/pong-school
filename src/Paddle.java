@@ -11,9 +11,9 @@ import javafx.stage.Stage;
  * Created by joseph on 5/8/17.
  */
 public class Paddle {
-    private Rectangle rec;
+    protected Rectangle rec;
     private double currX;
-    private double currY;
+    protected double currY;
     private int windowLimits;
     private double movementSpeed;
 
