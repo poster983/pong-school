@@ -27,9 +27,11 @@ public class AIPaddle extends Paddle
         //rec.setTranslateY(currY += 0.05);
         
         if(ballPos[1] > currY) {
-            rec.setTranslateY(currY += 0.5);
+            moveY(movementSpeed);
+            //rec.setTranslateY(currY += movementSpeed);
         } else if(ballPos[1] <= currY) {
-            rec.setTranslateY(currY -= 0.5);
+            moveY(-movementSpeed);
+            //rec.setTranslateY(currY -= movementSpeed);
         }
     }
 }

@@ -15,7 +15,7 @@ public class Paddle {
     private double currX;
     protected double currY;
     private int windowLimits;
-    private double movementSpeed;
+    protected double movementSpeed;
 
     //in vars for collision
     private int width = 10;

@@ -20,7 +20,7 @@ public class Ball {
     private double[] location;
     private int[] windowLimits;
     private int[] size = {10,10};
-    private double[] velocity = {1.0,0.5};
+    private double[] velocity = {1.0,0.5}; // 1.0,0.5
     //for collision detection AND performance
     private Paddle[] Paddles;
     
@@ -67,11 +67,17 @@ public class Ball {
         location[1] = location[1] + (velocity[1] * movementSpeed);
         ball.setTranslateX(location[0]);
         ball.setTranslateY(location[1]);
-
+        
+        //DEBUG ONLY FOR GLITCH THROUGH
+        /*
+         if((Paddles[1].getCurrX() > location[0] - Paddles[1].getWidth() +30 ) && ((location[1] < Paddles[1].getHeight()+ Paddles[1].getCurrY()) && (location[1] > Paddles[1].getHeight()))) {
+             movementSpeed = 0.2;
+            }
+        */
         //Check for col with right Paddle
-        if(Paddles[0].getCurrX() <= location[0]) {
+        if(Paddles[0].getCurrX() <= location[0]+Paddles[0].getWidth()) {
 
-            if (GameWindow.checkCollisionRight().getElements().size() > 0) {
+            if (GameWindow.checkCollision(Paddles[0]).getElements().size() > 0) {
                 //Calculate vector thingy for paddle collision detection
                 
                 double relativeIntersectY = (Paddles[0].getCurrY()+(Paddles[0].getHeight()/2)) - location[1];
@@ -93,14 +99,14 @@ public class Ball {
             }
         }
         //Check Col with left Paddle
-         if(Paddles[1].getCurrX() > location[0]) {
+         if(Paddles[1].getCurrX() > location[0] - Paddles[1].getWidth() ) {
 
-            if (GameWindow.checkCollisionLeft().getElements().size() > 0) {
+            if (GameWindow.checkCollision(Paddles[1]).getElements().size() > 0) {
                 //Calculate vector thingy for paddle collision detection
-                
+                System.out.println("Hit Left");
                 double relativeIntersectY = (Paddles[1].getCurrY()+(Paddles[1].getHeight()/2)) - location[1];
                 double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[1].getHeight()/2));
-                double bounceAngle = normalizedRelativeIntersectionY * 75;
+                double bounceAngle = normalizedRelativeIntersectionY * -75;
                 double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
                 double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));
                 /*
@@ -134,6 +140,7 @@ public class Ball {
                     location[0] = 0;
                     location[1] = 0;
                     velocity = new double[]{-1*velocity[0], velocity[1]};
+                    System.out.println("hit");
                 }
                 // check for col with left wall QUICK TEST
                 /*if(location[0] <= 0) {
