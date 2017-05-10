@@ -23,7 +23,7 @@ public class Ball {
     private double[] velocity = {1.0,0.5};
     //for collision detection AND performance
     private Paddle[] Paddles;
-    private double paddleRightX;
+    
 
     private static Timer timer = new Timer();
 
@@ -42,10 +42,7 @@ public class Ball {
 
         movementSpeed = _movementSpeed;
 
-        //Get paddle info from player 1
-
-        paddleRightX = _paddleArray[0].getCurrX();
-
+        //Get paddle info
         Paddles = _paddleArray;
 
        
@@ -72,13 +69,37 @@ public class Ball {
         ball.setTranslateY(location[1]);
 
         //Check for col with right Paddle
-        if(paddleRightX <= location[0]) {
+        if(Paddles[0].getCurrX() <= location[0]) {
 
-            if (GameWindow.checkCollision().getElements().size() > 0) {
+            if (GameWindow.checkCollisionRight().getElements().size() > 0) {
                 //Calculate vector thingy for paddle collision detection
                 
                 double relativeIntersectY = (Paddles[0].getCurrY()+(Paddles[0].getHeight()/2)) - location[1];
                 double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[0].getHeight()/2));
+                double bounceAngle = normalizedRelativeIntersectionY * 75;
+                double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
+                double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));
+                /*
+                System.out.println("Rel intersect Y: " + relativeIntersectY);
+                System.out.println("Norm intersect Y: " + normalizedRelativeIntersectionY);
+                System.out.println("Bounce aqng: " + bounceAngle);
+                System.out.println(ballVx);
+                System.out.println(ballVy);
+                System.out.println("________ \n");
+                */
+                velocity = new double[]{ballVx, ballVy};
+                 
+                //velocity = new double[]{-1*velocity[0], velocity[1]};
+            }
+        }
+        //Check Col with left Paddle
+         if(Paddles[1].getCurrX() > location[0]) {
+
+            if (GameWindow.checkCollisionLeft().getElements().size() > 0) {
+                //Calculate vector thingy for paddle collision detection
+                
+                double relativeIntersectY = (Paddles[1].getCurrY()+(Paddles[1].getHeight()/2)) - location[1];
+                double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[1].getHeight()/2));
                 double bounceAngle = normalizedRelativeIntersectionY * 75;
                 double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
                 double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));

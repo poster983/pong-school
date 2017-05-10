@@ -18,7 +18,7 @@ public class GameWindow extends Application {
     private static final int MAX_WINDOW_SIZE_X = 940;
     private static final int MAX_WINDOW_SIZE_Y = 640;
     private static final double PADDLE_MOVEMENT_SPEED = 0.5;//0.4
-    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.5; //0.03
+    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //0.03
     private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
     private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
                                                                                                                                //
@@ -151,10 +151,16 @@ public class GameWindow extends Application {
 
 
     //Check for Ball paddle Collision
-    public static Path checkCollision(){
-        //TODO: Add collision for left side
-        //System.out.println((Path)Shape.intersect(player.getRectangle(), ball.getBall()));
+    public static Path checkCollisionRight(){
+        
+        System.out.println((Path)Shape.intersect(player.getRectangle(), ball.getBall()));
         return (Path)Shape.intersect(player.getRectangle(), ball.getBall());
+
+    }
+     public static Path checkCollisionLeft(){
+       
+        System.out.println((Path)Shape.intersect(AI.getRectangle(), ball.getBall()));
+        return (Path)Shape.intersect(AI.getRectangle(), ball.getBall());
 
     }
 }
