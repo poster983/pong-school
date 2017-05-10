@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=_x\ _y\ _windowLimits\ _movementSpeed
+comment0.target=AIPaddle(int,\ int,\ int,\ double)
+comment1.params=ballPos
+comment1.target=void\ update(double[])
+numComments=2
