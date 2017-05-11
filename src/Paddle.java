@@ -7,15 +7,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.scene.text.*;
 /**
  * Created by joseph on 5/8/17.
  */
 public class Paddle {
     protected Rectangle rec;
+    private Text scoreBd;
     private double currX;
     protected double currY;
     private int windowLimits;
     protected double movementSpeed;
+    private int score;
 
     //in vars for collision
     private int width = 10;
@@ -29,6 +32,11 @@ public class Paddle {
         currX = _x;
         rec.setTranslateY(_y);
         currY = _y;
+        score = 0;
+        
+        scoreBd = new Text(10, 50, ""+score);
+        scoreBd.setFont(Font.font ("Verdana", 70));
+        
 
         windowLimits = _windowLimits;
         movementSpeed = _movementSpeed;
@@ -48,6 +56,19 @@ public class Paddle {
     public double getHeight() {
         return height;
     }
+    public void incScore(int inc)  {
+        score += inc;
+        scoreBd.setText("" + score); 
+    }
+    public double getScore() {
+        return score;
+    }
+    
+    public Text getScoreBd() {
+        return scoreBd;
+    }
+    
+    
 
 
     //gets the rectangle object

@@ -135,12 +135,13 @@ public class Ball {
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[0]);
                     //velocity = new double[]{-1*velocity[0], velocity[1]};
+                    Paddles[0].incScore(1);
                     ball.setTranslateX(0);
                     ball.setTranslateY(0);
                     location[0] = 0;
                     location[1] = 0;
-                    velocity = new double[]{-1*velocity[0], velocity[1]};
-                    System.out.println("hit");
+                    velocity = new double[]{-1*velocity[0], -1*velocity[1]};
+                    //System.out.println("hit");
                 }
                 // check for col with left wall QUICK TEST
                 /*if(location[0] <= 0) {
@@ -160,6 +161,7 @@ public class Ball {
                 if(location[0] >= (windowLimits[0]/2)){
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[1]);
+                    Paddles[1].incScore(1);
                     ball.setTranslateX(0);
                     ball.setTranslateY(0);
                     location[0] = 0;

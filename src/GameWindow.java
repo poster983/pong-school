@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Shape;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Path;
 import javafx.scene.control.Button;
 import javafx.scene.text.*;
@@ -114,6 +115,20 @@ public class GameWindow extends Application {
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
         root.getChildren().add(ball.getBall());
+        Text player1Score = player.getScoreBd();
+        player1Score.setTranslateY(-MAX_WINDOW_SIZE_Y/2+100);
+        player1Score.setTranslateX(100);
+        root.getChildren().add(player.getScoreBd());
+        
+        Text player2Score = AI.getScoreBd();
+        player2Score.setTranslateY(-MAX_WINDOW_SIZE_Y/2+100);
+        player2Score.setTranslateX(-100);
+        root.getChildren().add(AI.getScoreBd());
+        
+        Line centerLine = new Line(0, MAX_WINDOW_SIZE_Y/2, 0, -1*MAX_WINDOW_SIZE_Y/2);
+        centerLine.getStrokeDashArray().addAll(20d, 10d, 10d, 10d);
+        centerLine.setStrokeWidth(3.0);
+        root.getChildren().add(centerLine);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
