@@ -2,6 +2,7 @@ package src;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -9,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Shape;
 import javafx.scene.shape.Path;
+import javafx.scene.control.Button;
 import java.util.*;
 import javafx.application.Platform;
 
@@ -25,28 +27,79 @@ public class GameWindow extends Application {
     private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
     
     private static Timer timer = new Timer();
+    
+    
+    private StackPane root = new StackPane();
+    private Scene scene = new Scene(root, 300, 250);
 
     @Override
     public void start(Stage primaryStage) {
-        /*
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        
+        Button singlePlayerButton = new Button();
+        singlePlayerButton.setText("Single Player");
+        singlePlayerButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                playSinglePlayer();
             }
         });
-        */
+        
        System.out.println(-MAX_WINDOW_SIZE_X/2);
+
+        
+        root.getChildren().add(singlePlayerButton);
+        //root.getChildren().add(player.getRectangle());
+        //root.getChildren().add(AI.getRectangle());
+        //root.getChildren().add(ball.getBall());
+
+        
+
+        primaryStage.setTitle("Pong!");
+        primaryStage.setScene(scene);
+        primaryStage.setHeight(MAX_WINDOW_SIZE_Y);
+        primaryStage.setWidth(MAX_WINDOW_SIZE_X);
+        primaryStage.setMinHeight(MAX_WINDOW_SIZE_Y);
+        primaryStage.setMinWidth(MAX_WINDOW_SIZE_X);
+        primaryStage.setMaxHeight(MAX_WINDOW_SIZE_Y);
+        primaryStage.setMaxWidth(MAX_WINDOW_SIZE_X);
+        
+        
+        primaryStage.show();
+        
+    }
+
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+
+    //Check for Ball paddle Collision
+    public static Path checkCollision(Paddle thisPaddle){
+        
+        System.out.println((Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall()));
+        return (Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall());
+
+    }
+    /*
+     public static Path checkCollisionLeft(){
+       
+        System.out.println((Path)Shape.intersect(AI.getRectangle(), ball.getBall()));
+        return (Path)Shape.intersect(AI.getRectangle(), ball.getBall());
+
+    }*/
+    
+    private void playSinglePlayer() {
+        System.out.println(-MAX_WINDOW_SIZE_X/2);
 
         StackPane root = new StackPane();
         //root.getChildren().add(btn);
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
         root.getChildren().add(ball.getBall());
-
+        /*
         Scene scene = new Scene(root, 300, 250);
 
         primaryStage.setTitle("Pong!");
@@ -57,6 +110,7 @@ public class GameWindow extends Application {
         primaryStage.setMinWidth(MAX_WINDOW_SIZE_X);
         primaryStage.setMaxHeight(MAX_WINDOW_SIZE_Y);
         primaryStage.setMaxWidth(MAX_WINDOW_SIZE_X);
+        */
         //window size listener
         /*
         primaryStage.titleProperty().bind(
@@ -102,7 +156,7 @@ public class GameWindow extends Application {
 
 
         //SHOW the window
-        primaryStage.show();
+        //primaryStage.show();
 
         //Movement timer
         /*
@@ -142,26 +196,4 @@ public class GameWindow extends Application {
             }
         }, 1,1);
     }
-
-
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-
-    //Check for Ball paddle Collision
-    public static Path checkCollision(Paddle thisPaddle){
-        
-        System.out.println((Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall()));
-        return (Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall());
-
-    }
-    /*
-     public static Path checkCollisionLeft(){
-       
-        System.out.println((Path)Shape.intersect(AI.getRectangle(), ball.getBall()));
-        return (Path)Shape.intersect(AI.getRectangle(), ball.getBall());
-
-    }*/
 }

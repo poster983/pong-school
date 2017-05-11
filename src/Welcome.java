@@ -27,7 +27,7 @@ public class Welcome extends Application {
         });
         StackPane root = new StackPane();
         root.getChildren().add(btn);
-
+        
         Scene scene = new Scene(root, 300, 250);
 
         primaryStage.setTitle("Pong!");
@@ -38,7 +38,7 @@ public class Welcome extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
+        
     }
 
 
