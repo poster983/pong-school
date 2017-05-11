@@ -9,7 +9,6 @@ comment3.params=thisPaddle
 comment3.target=javafx.scene.shape.Path\ checkCollision(Paddle)
 comment4.params=
 comment4.target=void\ playSinglePlayer()
-comment4.text=\r\n\ \ \ \ \ public\ static\ Path\ checkCollisionLeft(){\r\n\ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ System.out.println((Path)Shape.intersect(AI.getRectangle(),\ ball.getBall()));\r\n\ \ \ \ \ \ \ \ return\ (Path)Shape.intersect(AI.getRectangle(),\ ball.getBall());\r\n\r\n}
 comment5.params=event
 comment5.target=void\ handle(javafx.scene.input.KeyEvent)
 comment6.params=event

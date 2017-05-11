@@ -41,6 +41,7 @@ public class GameWindow extends Application {
 
             @Override
             public void handle(ActionEvent event) {
+                root.getChildren().remove(singlePlayerButton);
                 playSinglePlayer();
             }
         });
@@ -83,18 +84,11 @@ public class GameWindow extends Application {
         return (Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall());
 
     }
-    /*
-     public static Path checkCollisionLeft(){
-       
-        System.out.println((Path)Shape.intersect(AI.getRectangle(), ball.getBall()));
-        return (Path)Shape.intersect(AI.getRectangle(), ball.getBall());
-
-    }*/
-    
+    //Single player logic goes here
     private void playSinglePlayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
 
-        StackPane root = new StackPane();
+        
         //root.getChildren().add(btn);
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
