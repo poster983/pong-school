@@ -57,8 +57,11 @@ public class Paddle {
         return height;
     }
     public void incScore(int inc)  {
+        
         score += inc;
         scoreBd.setText("" + score); 
+        GameWindow.checkEndCondition(this);
+        
     }
     public double getScore() {
         return score;

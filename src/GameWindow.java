@@ -29,6 +29,7 @@ public class GameWindow extends Application {
     private static final int MAX_WINDOW_SIZE_Y = 640; // 640
     private static final double PADDLE_MOVEMENT_SPEED = 0.5;//0.4
     private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //0.9
+    private static final int WIN_SCORE = 10;
     private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
     private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
     //
@@ -36,7 +37,7 @@ public class GameWindow extends Application {
 
     private static Timer timer = new Timer();
 
-    private StackPane root = new StackPane();
+    private static StackPane root = new StackPane();
     private Scene scene = new Scene(root, 300, 250);
 
     @Override
@@ -102,10 +103,17 @@ public class GameWindow extends Application {
 
     //Check for Ball paddle Collision
     public static Path checkCollision(Paddle thisPaddle){
-
+        
         System.out.println((Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall()));
         return (Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall());
-
+        
+    }
+    
+    public static void checkEndCondition(Paddle thisPaddle) {
+        if(WIN_SCORE >= thisPaddle.getScore()) {
+            System.out.println(thisPaddle.getScore());
+            //root.getChildren().clear();
+        }
     }
     //Single player logic goes here
     private void playSinglePlayer() {
