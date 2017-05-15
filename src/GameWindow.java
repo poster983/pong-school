@@ -39,6 +39,8 @@ public class GameWindow extends Application {
 
     private static StackPane root = new StackPane();
     private Scene scene = new Scene(root, 300, 250);
+    
+    
 
     @Override
     public void start(Stage primaryStage) {
@@ -225,18 +227,7 @@ public class GameWindow extends Application {
     private void multiPlayerSetupHost() {
         System.out.println("Trying to make a server...");
         //Set Sockets 
-        try {
-            ServerSocket serverSocket = new ServerSocket(1234);
-            Socket socket = serverSocket.accept();
-
-            //System.out.println(socket.toString());
-            playMultiPlayer(socket);
-
-        }  catch( Exception e )
-        {
-            System.out.println("Error");
-            e.printStackTrace();
-        }
+       MultiplayerServer.call();
 
     }
     //Multi player logic goes here
