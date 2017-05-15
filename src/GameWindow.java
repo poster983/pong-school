@@ -114,7 +114,7 @@ public class GameWindow extends Application {
             System.out.println(thisPaddle.getScore());
             root.getChildren().clear();
             timer.cancel();
-            Text winner = new Text(10, 50, thisPaddle.getName() + "Wins!");
+            Text winner = new Text(10, 50, thisPaddle.getName() + " Wins!");
             winner.setFont(new Font(20));
             winner.setTranslateY(-100);
             root.getChildren().add(winner);
