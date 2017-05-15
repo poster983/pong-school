@@ -22,7 +22,7 @@ import java.net.Socket;
 import java.util.*;
 import javafx.application.Platform;
 
-public class GameWindow extends Application {
+public class GameWindow extends Application         {
 
     private boolean goDown, goUp;
     private static final int MAX_WINDOW_SIZE_X = 940; //940
