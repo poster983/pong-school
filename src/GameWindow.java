@@ -113,11 +113,11 @@ public class GameWindow extends Application {
             System.out.println(WIN_SCORE);
             System.out.println(thisPaddle.getScore());
             root.getChildren().clear();
-
-            Text winner = new Text(10, 50, "Pong!");
+            timer.cancel();
+            Text winner = new Text(10, 50, thisPaddle.getName() + "Wins!");
             winner.setFont(new Font(20));
             winner.setTranslateY(-100);
-
+            root.getChildren().add(winner);
             return true;
         } else {
             return false;
