@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 public class AIPaddle extends Paddle
 {
     
-    public AIPaddle(int _x, int _y, int _windowLimits, double _movementSpeed) {
-        super(_x, _y, _windowLimits, _movementSpeed);
+    public AIPaddle(int _x, int _y, int _windowLimits, double _movementSpeed, String _name) {
+        super(_x, _y, _windowLimits, _movementSpeed, _name);
         
     }
     

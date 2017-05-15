@@ -29,9 +29,9 @@ public class GameWindow extends Application {
     private static final int MAX_WINDOW_SIZE_Y = 640; // 640
     private static final double PADDLE_MOVEMENT_SPEED = 0.5;//0.4
     private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //0.9
-    private static final int WIN_SCORE = 10;
-    private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
-    private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED);
+    private static final double WIN_SCORE = 10.0;
+    private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "Player 1");
+    private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "AI");
     //
     private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
 
@@ -76,14 +76,13 @@ public class GameWindow extends Application {
             });
 
         root.getChildren().add(bigTitle);
-        
+
         root.getChildren().add(singlePlayerButton);
 
         root.getChildren().add(multiPlayerButton);
         //root.getChildren().add(player.getRectangle());
         //root.getChildren().add(AI.getRectangle());
         //root.getChildren().add(ball.getBall());
-
 
         primaryStage.setTitle("Pong!");
         primaryStage.setScene(scene);
@@ -103,23 +102,31 @@ public class GameWindow extends Application {
 
     //Check for Ball paddle Collision
     public static Path checkCollision(Paddle thisPaddle){
-        
+
         System.out.println((Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall()));
         return (Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall());
-        
+
     }
-    
-    public static void checkEndCondition(Paddle thisPaddle) {
-        if(WIN_SCORE >= thisPaddle.getScore()) {
+
+    public static boolean checkEndCondition(Paddle thisPaddle) {
+        if(WIN_SCORE <= thisPaddle.getScore()) {
+            System.out.println(WIN_SCORE);
             System.out.println(thisPaddle.getScore());
-            //root.getChildren().clear();
+            root.getChildren().clear();
+
+            Text winner = new Text(10, 50, "Pong!");
+            winner.setFont(new Font(20));
+            winner.setTranslateY(-100);
+
+            return true;
+        } else {
+            return false;
         }
     }
     //Single player logic goes here
     private void playSinglePlayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
 
-        
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
         root.getChildren().add(ball.getBall());
@@ -127,12 +134,12 @@ public class GameWindow extends Application {
         player1Score.setTranslateY(-MAX_WINDOW_SIZE_Y/2+100);
         player1Score.setTranslateX(100);
         root.getChildren().add(player.getScoreBd());
-        
+
         Text player2Score = AI.getScoreBd();
         player2Score.setTranslateY(-MAX_WINDOW_SIZE_Y/2+100);
         player2Score.setTranslateX(-100);
         root.getChildren().add(AI.getScoreBd());
-        
+
         Line centerLine = new Line(0, MAX_WINDOW_SIZE_Y/2, 0, -1*MAX_WINDOW_SIZE_Y/2);
         centerLine.getStrokeDashArray().addAll(20d, 10d, 10d, 10d);
         centerLine.setStrokeWidth(3.0);
@@ -166,7 +173,6 @@ public class GameWindow extends Application {
                 }
             });
 
-        
         timer.schedule(new TimerTask() {
                 public void run() {
                     Platform.runLater(new Runnable() {
@@ -191,7 +197,6 @@ public class GameWindow extends Application {
         Text bigTitle = new Text(10, 50, "Multiplayer Setup!");
         bigTitle.setFont(new Font(20));
         bigTitle.setTranslateY(-100);
-        
 
         Button hostIt = new Button();
         hostIt.setText("Host");
@@ -199,13 +204,11 @@ public class GameWindow extends Application {
         Button connectIt = new Button();
         connectIt.setText("Connect");
         connectIt.setTranslateY(50);
-        
-        
+
         root.getChildren().add(bigTitle);
         root.getChildren().add(hostIt);
         root.getChildren().add(connectIt);
-        
-        
+
         
         hostIt.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -218,19 +221,17 @@ public class GameWindow extends Application {
                 }
             });
 
-        
     }
-        
     private void multiPlayerSetupHost() {
         System.out.println("Trying to make a server...");
         //Set Sockets 
         try {
             ServerSocket serverSocket = new ServerSocket(1234);
             Socket socket = serverSocket.accept();
-            
+
             //System.out.println(socket.toString());
             playMultiPlayer(socket);
-        
+
         }  catch( Exception e )
         {
             System.out.println("Error");
@@ -242,7 +243,6 @@ public class GameWindow extends Application {
     private void playMultiPlayer(Socket socket) {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
 
-        
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
         root.getChildren().add(ball.getBall());
@@ -275,7 +275,6 @@ public class GameWindow extends Application {
                 }
             });
 
-        
         timer.schedule(new TimerTask() {
                 public void run() {
                     Platform.runLater(new Runnable() {

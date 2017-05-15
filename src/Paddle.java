@@ -19,13 +19,13 @@ public class Paddle {
     private int windowLimits;
     protected double movementSpeed;
     private int score;
-
+    private String name;
     //in vars for collision
     private int width = 10;
     private int height = 90;
 
 
-    public Paddle(int _x, int _y, int _windowLimits, double _movementSpeed) {
+    public Paddle(int _x, int _y, int _windowLimits, double _movementSpeed, String _name) {
         rec = new Rectangle(0, 0, width, height);
         rec.setFill(Color.BLACK);
         rec.setTranslateX(_x);
@@ -37,6 +37,7 @@ public class Paddle {
         scoreBd = new Text(10, 50, ""+score);
         scoreBd.setFont(Font.font ("Verdana", 70));
         
+        name = _name;
 
         windowLimits = _windowLimits;
         movementSpeed = _movementSpeed;
@@ -70,7 +71,9 @@ public class Paddle {
     public Text getScoreBd() {
         return scoreBd;
     }
-    
+    public String getName() {
+        return name;
+    }
     
 
 
