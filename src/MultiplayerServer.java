@@ -16,7 +16,7 @@ import java.net.Socket;
 public class MultiplayerServer implements Runnable
 {
     private ServerSocket serverSocket;
-    
+    //Thread
    public void run() {
         try {
               serverSocket = new ServerSocket(1234);
