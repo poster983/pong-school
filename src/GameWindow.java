@@ -34,7 +34,7 @@ public class GameWindow extends Application {
     private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "AI");
     //
     private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
-
+    
     private static Timer timer = new Timer();
 
     private static StackPane root = new StackPane();
@@ -230,6 +230,15 @@ public class GameWindow extends Application {
        MultiplayerServer.call();
 
     }
+    
+    private void multiPlayerSetupConnect() {
+        System.out.println("Trying to Connect to a server...");
+        //Set Sockets 
+      socket = new Socket(serverAddress, PORT);
+
+    }
+    
+    
     //Multi player logic goes here
     private void playMultiPlayer(Socket socket) {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
