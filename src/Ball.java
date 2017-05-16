@@ -82,7 +82,7 @@ public class Ball {
                 
                 double relativeIntersectY = (Paddles[0].getCurrY()+(Paddles[0].getHeight()/2)) - location[1];
                 double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[0].getHeight()/2));
-                double bounceAngle = normalizedRelativeIntersectionY * 75;
+                double bounceAngle = normalizedRelativeIntersectionY * 45 + 45;
                 double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
                 double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));
                 /*

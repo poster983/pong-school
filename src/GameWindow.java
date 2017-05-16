@@ -27,8 +27,8 @@ public class GameWindow extends Application         {
     private boolean goDown, goUp;
     private static final int MAX_WINDOW_SIZE_X = 940; //940
     private static final int MAX_WINDOW_SIZE_Y = 640; // 640
-    private static final double PADDLE_MOVEMENT_SPEED = 0.5;//0.4
-    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //0.9
+    private static final double PADDLE_MOVEMENT_SPEED = 0.7;//0.5
+    private static final double INITIAL_BALL_MOVEMENT_SPEED = 1.05; //1.0
     private static final double WIN_SCORE = 10.0;
     private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "Player 1");
     private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "AI");
