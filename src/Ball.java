@@ -82,7 +82,7 @@ public class Ball {
                 
                 double relativeIntersectY = (Paddles[0].getCurrY()+(Paddles[0].getHeight()/2)) - location[1];
                 double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[0].getHeight()/2));
-                double bounceAngle = normalizedRelativeIntersectionY * 45 + 45;
+                double bounceAngle = normalizedRelativeIntersectionY * 75;
                 double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
                 double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));
                 /*
@@ -93,6 +93,7 @@ public class Ball {
                 System.out.println(ballVy);
                 System.out.println("________ \n");
                 */
+                
                 velocity = new double[]{ballVx, ballVy};
                  
                 //velocity = new double[]{-1*velocity[0], velocity[1]};
@@ -117,6 +118,7 @@ public class Ball {
                 System.out.println(ballVy);
                 System.out.println("________ \n");
                 */
+                
                 velocity = new double[]{ballVx, ballVy};
                  
                 //velocity = new double[]{-1*velocity[0], velocity[1]};

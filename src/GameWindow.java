@@ -25,16 +25,19 @@ import javafx.application.Platform;
 public class GameWindow extends Application         {
 
     private boolean goDown, goUp;
+    private boolean goDown2, goUp2;
     private static final int MAX_WINDOW_SIZE_X = 940; //940
     private static final int MAX_WINDOW_SIZE_Y = 640; // 640
     private static final double PADDLE_MOVEMENT_SPEED = 0.7;//0.5
-    private static final double INITIAL_BALL_MOVEMENT_SPEED = 1.05; //1.0
+    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //1.0
     private static final double WIN_SCORE = 10.0;
     private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "Player 1");
+    private static Paddle playerTwo = new Paddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "Player 2");
     private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "AI");
     //
     private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
-
+    private static Ball ballM = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, playerTwo}); //ball for multiplayer
+    
     private static Timer timer = new Timer();
 
     private static StackPane root = new StackPane();
@@ -44,11 +47,15 @@ public class GameWindow extends Application         {
     public void start(Stage primaryStage) {
 
         Button singlePlayerButton = new Button();
-        singlePlayerButton.setText("Single Player");
-
-        Button multiPlayerButton = new Button();
-        multiPlayerButton.setText("MultiPlayer");
-        multiPlayerButton.setTranslateY(50);
+        singlePlayerButton.setText("Singleplayer");
+        
+        Button multiPlayerButton1 = new Button();
+        multiPlayerButton1.setText("Local Multiplayer");
+        multiPlayerButton1.setTranslateY(50);
+        
+        Button multiPlayerButton2 = new Button();
+        multiPlayerButton2.setText("Online Multiplayer");
+        multiPlayerButton2.setTranslateY(100);
 
         Text bigTitle = new Text(10, 50, "Pong!");
         bigTitle.setFont(new Font(20));
@@ -59,18 +66,32 @@ public class GameWindow extends Application         {
                 public void handle(ActionEvent event) {
                     root.getChildren().remove(singlePlayerButton);
                     root.getChildren().remove(bigTitle);
-                    root.getChildren().remove(multiPlayerButton);
+                    root.getChildren().remove(multiPlayerButton1);
+                    root.getChildren().remove(multiPlayerButton2);
                     playSinglePlayer();
                 }
             });
-
-        multiPlayerButton.setOnAction(new EventHandler<ActionEvent>() {
+            
+        multiPlayerButton1.setOnAction(new EventHandler<ActionEvent>() {
 
                 @Override
                 public void handle(ActionEvent event) {
                     root.getChildren().remove(singlePlayerButton);
                     root.getChildren().remove(bigTitle);
-                    root.getChildren().remove(multiPlayerButton);
+                    root.getChildren().remove(multiPlayerButton1);
+                    root.getChildren().remove(multiPlayerButton2);
+                    playMultiplayer();
+                }
+            });
+            
+        multiPlayerButton2.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent event) {
+                    root.getChildren().remove(singlePlayerButton);
+                    root.getChildren().remove(bigTitle);
+                    root.getChildren().remove(multiPlayerButton1);
+                    root.getChildren().remove(multiPlayerButton2);
                     multiPlayerSetup();
                 }
             });
@@ -79,7 +100,8 @@ public class GameWindow extends Application         {
 
         root.getChildren().add(singlePlayerButton);
 
-        root.getChildren().add(multiPlayerButton);
+        root.getChildren().add(multiPlayerButton1);
+        root.getChildren().add(multiPlayerButton2);
         //root.getChildren().add(player.getRectangle());
         //root.getChildren().add(AI.getRectangle());
         //root.getChildren().add(ball.getBall());
@@ -185,6 +207,107 @@ public class GameWindow extends Application         {
 
                                 player.moveY(py);
                                 AI.update(ball.getY());
+                                ball.updateBall();
+                            }
+                        });
+                }
+            }, 1,1);
+    }
+    
+    private void playMultiplayer() {
+        System.out.println(-MAX_WINDOW_SIZE_X/2);
+
+        root.getChildren().add(player.getRectangle());
+        root.getChildren().add(playerTwo.getRectangle());
+        root.getChildren().add(ballM.getBall());
+        Text player1Score = player.getScoreBd();
+        player1Score.setTranslateY(-MAX_WINDOW_SIZE_Y/2+100);
+        player1Score.setTranslateX(100);
+        root.getChildren().add(player.getScoreBd());
+
+        Text player2Score = playerTwo.getScoreBd();
+        player2Score.setTranslateY(-MAX_WINDOW_SIZE_Y/2+100);
+        player2Score.setTranslateX(-100);
+        root.getChildren().add(playerTwo.getScoreBd());
+
+        Line centerLine = new Line(0, MAX_WINDOW_SIZE_Y/2, 0, -1*MAX_WINDOW_SIZE_Y/2);
+        centerLine.getStrokeDashArray().addAll(20d, 10d, 10d, 10d);
+        centerLine.setStrokeWidth(3.0);
+        root.getChildren().add(centerLine);
+        
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    switch (event.getCode()) {
+                        case UP:
+                        goUp = true;
+                        break;
+                        case DOWN:
+                        goDown = true;
+                        break;
+                    }
+                }
+            });
+
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    switch (event.getCode()) {
+                        case UP:
+                        goUp = false;
+                        break;
+                        case DOWN:
+                        goDown = false;
+                        break;
+                    }
+                }
+            });
+            
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    switch (event.getCode()) {
+                        case W:
+                        goUp2 = true;
+                        break;
+                        case S:
+                        goDown2 = true;
+                        break;
+                    }
+                }
+            });
+
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    switch (event.getCode()) {
+                        case W:
+                        goUp2 = false;
+                        break;
+                        case S:
+                        goDown2 = false;
+                        break;
+                    }
+                }
+            });
+
+        timer.schedule(new TimerTask() {
+                public void run() {
+                    Platform.runLater(new Runnable() {
+                            public void run() {
+
+                                double py = 0;
+
+                                if (goDown) py += PADDLE_MOVEMENT_SPEED;
+                                if (goUp) py += -PADDLE_MOVEMENT_SPEED;
+                                
+                                double py2 = 0;
+                                
+                                if (goDown2) py2 += PADDLE_MOVEMENT_SPEED;
+                                if (goUp2) py2 += -PADDLE_MOVEMENT_SPEED;
+                                
+                                player.moveY(py);
+                                playerTwo.moveY(py2);
                                 ball.updateBall();
                             }
                         });
