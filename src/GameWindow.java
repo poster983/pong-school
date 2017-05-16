@@ -267,8 +267,8 @@ public class GameWindow extends Application {
         socketOut.println(Message);
     }
     
-    //Multi player logic goes here
-    private void playMultiPlayer(Socket socket) {
+    //Multi player LAN logic goes here
+    private void playMultiPlayerLan(Socket socket) {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
 
         root.getChildren().add(player.getRectangle());
