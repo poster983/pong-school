@@ -1,7 +1,12 @@
-We're going to use sockets to send movement data to each client
+
 
 Cooper's Stuff:
 I'm going to try to implement local multiplayer, i.e., 2 players on the same keyboard
 I want to get the speed of the ball and paddle working well
 I want to change the spawning behavior of the ball, to make it spawn from the side that was scored on
 I want to try adding obstacles in the board to spice up the game
+
+
+Joseph's Stuff:
+I am going to use sockets to send movement data to each client
+I am going to create a client and server code.
