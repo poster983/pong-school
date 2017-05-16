@@ -16,6 +16,7 @@ import java.net.Socket;
 public class MultiplayerServer implements Runnable
 {
     private ServerSocket serverSocket;
+    private Socket[] SocketList = new Socket[2];
     //Thread
    public void run() {
         try {
@@ -29,6 +30,7 @@ public class MultiplayerServer implements Runnable
          try {
               while(true) { //TESTING THIS IS PLAGERISM
                   Socket test = serverSocket.accept();
+                  System.out.println(test.toString());
                 }
           }catch( Exception e )
         {
@@ -36,6 +38,7 @@ public class MultiplayerServer implements Runnable
             e.printStackTrace();
         }
         
+        //
     }
     
     public static void call() {
