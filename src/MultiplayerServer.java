@@ -36,6 +36,7 @@ public class MultiplayerServer implements Runnable
                 SocketList[x] = serverSocket.accept();
                 if(SocketList[0] != null) {
                     x = 1;
+                    listenForIn();
                 }
                 if(SocketList[0] != null && SocketList[1] != null) {
                     System.out.println("All Players Connected");
@@ -63,7 +64,8 @@ public class MultiplayerServer implements Runnable
 
         //
     }
-
+    
+    // My issle spot 
     public void listenForIn() {
         try {
             while (true) {
