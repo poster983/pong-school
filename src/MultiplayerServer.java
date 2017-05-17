@@ -18,29 +18,48 @@ public class MultiplayerServer implements Runnable
     private ServerSocket serverSocket;
     private Socket[] SocketList = new Socket[2];
     //Thread
-   public void run() {
+    public void run() {
         try {
-              serverSocket = new ServerSocket(1234);
-          }catch( Exception e )
+            serverSocket = new ServerSocket(1234);
+        }catch( Exception e )
         {
             System.out.println("Error");
             e.printStackTrace();
         }
-        
-         try {
-              while(true) { //TESTING THIS IS PLAGERISM
-                  Socket test = serverSocket.accept();
-                  System.out.println(test.toString());
+
+        try {
+            int x = 0;
+            while(true) {//TESTING THIS IS PLAGERISM
+                
+                SocketList[x] = serverSocket.accept();
+                 if(SocketList[0] != null) {
+                       x = 1;
+                  }
+                if(SocketList[0] != null && SocketList[1] != null) {
+                     System.out.println("All Players Connected");
+                     System.out.println(SocketList[0].toString() + " " + SocketList[1].toString());
+                     
                 }
-          }catch( Exception e )
+                
+            }
+           
+        }catch( Exception e )
         {
             System.out.println("Error");
             e.printStackTrace();
+        } finally {
+            try{
+                serverSocket.close();
+            } catch( Exception e )
+            {
+                System.out.println("Error");
+                e.printStackTrace();
+            }
         }
-        
+
         //
     }
-    
+
     public static void call() {
         System.out.println("Trying to make server...");
         (new Thread(new MultiplayerServer())).start();
