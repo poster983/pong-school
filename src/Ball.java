@@ -76,10 +76,10 @@ public class Ball {
         */
         //Check for col with right Paddle
         if(Paddles[0].getCurrX() <= location[0]+Paddles[0].getWidth()) {
-
+            System.out.println("Check Right");
             if (GameWindow.checkCollision(Paddles[0]).getElements().size() > 0) {
                 //Calculate vector thingy for paddle collision detection
-                
+                System.out.println("Hit Right");
                 double relativeIntersectY = (Paddles[0].getCurrY()+(Paddles[0].getHeight()/2)) - location[1];
                 double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[0].getHeight()/2));
                 double bounceAngle = normalizedRelativeIntersectionY * 75;
@@ -93,6 +93,7 @@ public class Ball {
                 System.out.println(ballVy);
                 System.out.println("________ \n");
                 */
+                
                 velocity = new double[]{ballVx, ballVy};
                  
                 //velocity = new double[]{-1*velocity[0], velocity[1]};
@@ -117,6 +118,7 @@ public class Ball {
                 System.out.println(ballVy);
                 System.out.println("________ \n");
                 */
+                
                 velocity = new double[]{ballVx, ballVy};
                  
                 //velocity = new double[]{-1*velocity[0], velocity[1]};
