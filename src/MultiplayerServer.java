@@ -17,6 +17,8 @@ public class MultiplayerServer implements Runnable
 {
     private ServerSocket serverSocket;
     private Socket[] SocketList = new Socket[2];
+    BufferedReader input;
+    PrintWriter output;
     //Thread
     public void run() {
         try {
@@ -30,19 +32,21 @@ public class MultiplayerServer implements Runnable
         try {
             int x = 0;
             while(true) {//TESTING THIS IS PLAGERISM
-                
+
                 SocketList[x] = serverSocket.accept();
-                 if(SocketList[0] != null) {
-                       x = 1;
-                  }
-                if(SocketList[0] != null && SocketList[1] != null) {
-                     System.out.println("All Players Connected");
-                     System.out.println(SocketList[0].toString() + " " + SocketList[1].toString());
-                     
+                if(SocketList[0] != null) {
+                    x = 1;
                 }
-                
+                if(SocketList[0] != null && SocketList[1] != null) {
+                    System.out.println("All Players Connected");
+                    System.out.println(SocketList[0].toString() + " " + SocketList[1].toString());
+                    input = new BufferedReader(
+                        new InputStreamReader(SocketList[0].getInputStream()));
+                    output = new PrintWriter(SocketList[0].getOutputStream(), true);
+                }
+
             }
-           
+
         }catch( Exception e )
         {
             System.out.println("Error");
@@ -58,6 +62,18 @@ public class MultiplayerServer implements Runnable
         }
 
         //
+    }
+
+    public void listenForIn() {
+        try {
+            while (true) {
+                System.out.println(input.readLine());
+            }
+        }catch( Exception e )
+        {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
     }
 
     public static void call() {
