@@ -138,10 +138,11 @@ public class Ball {
                     //System.out.println(location[0]);
                     //velocity = new double[]{-1*velocity[0], velocity[1]};
                     Paddles[0].incScore(1);
+                    double y = Paddles[1].getCurrY();
                     ball.setTranslateX(0);
-                    ball.setTranslateY(0);
+                    ball.setTranslateY(y);
                     location[0] = 0;
-                    location[1] = 0;
+                    location[1] = y;
                     velocity = new double[]{-1*velocity[0], -1*velocity[1]};
                     //System.out.println("hit");
                 }
@@ -164,10 +165,11 @@ public class Ball {
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[1]);
                     Paddles[1].incScore(1);
+                    double y = Paddles[0].getCurrY();
                     ball.setTranslateX(0);
-                    ball.setTranslateY(0);
+                    ball.setTranslateY(y);
                     location[0] = 0;
-                    location[1] = 0;
+                    location[1] = y;
                     velocity = new double[]{-1*velocity[0], -1*velocity[1]};
                     //velocity = new double[]{velocity[0], velocity[1]};
                 }
