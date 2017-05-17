@@ -29,14 +29,13 @@ public class GameWindow extends Application         {
     private static final int MAX_WINDOW_SIZE_X = 940; //940
     private static final int MAX_WINDOW_SIZE_Y = 640; // 640
     private static final double PADDLE_MOVEMENT_SPEED = 0.7;//0.5
-    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //1.0
+    private static final double INITIAL_BALL_MOVEMENT_SPEED = 0.9; //0.9
     private static final double WIN_SCORE = 10.0;
     private static Paddle player = new Paddle(MAX_WINDOW_SIZE_X/2-50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "Player 1");
     private static Paddle playerTwo = new Paddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "Player 2");
     private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "AI");
     //
-    private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
-    private static Ball ballM = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, playerTwo}); //ball for multiplayer
+    private static Ball ball; //declared in the start methods to work with the right paddles
     
     private static Timer timer = new Timer();
 
@@ -124,7 +123,7 @@ public class GameWindow extends Application         {
 
     //Check for Ball paddle Collision
     public static Path checkCollision(Paddle thisPaddle){
-
+        
         System.out.println((Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall()));
         return (Path)Shape.intersect(thisPaddle.getRectangle(), ball.getBall());
 
@@ -148,7 +147,9 @@ public class GameWindow extends Application         {
     //Single player logic goes here
     private void playSinglePlayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
-
+        
+        ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
+        
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
         root.getChildren().add(ball.getBall());
@@ -166,6 +167,7 @@ public class GameWindow extends Application         {
         centerLine.getStrokeDashArray().addAll(20d, 10d, 10d, 10d);
         centerLine.setStrokeWidth(3.0);
         root.getChildren().add(centerLine);
+        
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
@@ -216,10 +218,12 @@ public class GameWindow extends Application         {
     
     private void playMultiplayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
+        
+        ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, playerTwo});
 
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(playerTwo.getRectangle());
-        root.getChildren().add(ballM.getBall());
+        root.getChildren().add(ball.getBall());
         Text player1Score = player.getScoreBd();
         player1Score.setTranslateY(-MAX_WINDOW_SIZE_Y/2+100);
         player1Score.setTranslateX(100);
@@ -245,28 +249,6 @@ public class GameWindow extends Application         {
                         case DOWN:
                         goDown = true;
                         break;
-                    }
-                }
-            });
-
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    switch (event.getCode()) {
-                        case UP:
-                        goUp = false;
-                        break;
-                        case DOWN:
-                        goDown = false;
-                        break;
-                    }
-                }
-            });
-            
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent event) {
-                    switch (event.getCode()) {
                         case W:
                         goUp2 = true;
                         break;
@@ -281,6 +263,12 @@ public class GameWindow extends Application         {
                 @Override
                 public void handle(KeyEvent event) {
                     switch (event.getCode()) {
+                        case UP:
+                        goUp = false;
+                        break;
+                        case DOWN:
+                        goDown = false;
+                        break;
                         case W:
                         goUp2 = false;
                         break;
@@ -290,7 +278,7 @@ public class GameWindow extends Application         {
                     }
                 }
             });
-
+               
         timer.schedule(new TimerTask() {
                 public void run() {
                     Platform.runLater(new Runnable() {
@@ -300,13 +288,13 @@ public class GameWindow extends Application         {
 
                                 if (goDown) py += PADDLE_MOVEMENT_SPEED;
                                 if (goUp) py += -PADDLE_MOVEMENT_SPEED;
-                                
+
+                                player.moveY(py);
                                 double py2 = 0;
-                                
+
                                 if (goDown2) py2 += PADDLE_MOVEMENT_SPEED;
                                 if (goUp2) py2 += -PADDLE_MOVEMENT_SPEED;
-                                
-                                player.moveY(py);
+
                                 playerTwo.moveY(py2);
                                 ball.updateBall();
                             }
