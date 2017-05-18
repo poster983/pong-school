@@ -67,7 +67,7 @@ public class GameWindow extends Application         {
                     root.getChildren().remove(bigTitle);
                     root.getChildren().remove(multiPlayerButton1);
                     root.getChildren().remove(multiPlayerButton2);
-                    playSinglePlayer();
+                    singleplayerSetup();
                 }
             });
             
@@ -116,7 +116,80 @@ public class GameWindow extends Application         {
 
         primaryStage.show();
     }
+    
+    private void singleplayerSetup() {
+        Button levelOne = new Button();
+        levelOne.setText("Easy AI");
+        levelOne.setTranslateY(-100);
+        
+        Button levelTwo = new Button();
+        levelTwo.setText("Medium AI");
+        levelTwo.setTranslateY(-50);
+        
+        Button levelThree = new Button();
+        levelThree.setText("Hard AI");
+        
+        Button levelFour = new Button();
+        levelFour.setText("Literally Impossible");
+        levelFour.setTranslateY(50);
+        
+        levelOne.setOnAction(new EventHandler<ActionEvent>() {
 
+                @Override
+                public void handle(ActionEvent event) {
+                    root.getChildren().remove(levelOne);
+                    root.getChildren().remove(levelTwo);
+                    root.getChildren().remove(levelThree);
+                    root.getChildren().remove(levelFour);
+                    AI.setSpeed(0.5);
+                    playSinglePlayer();
+                }
+            });
+        
+        levelTwo.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent event) {
+                    root.getChildren().remove(levelOne);
+                    root.getChildren().remove(levelTwo);
+                    root.getChildren().remove(levelThree);
+                    root.getChildren().remove(levelFour);
+                    AI.setSpeed(0.7);
+                    playSinglePlayer();
+                }
+            });
+                       
+        levelThree.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent event) {
+                    root.getChildren().remove(levelOne);
+                    root.getChildren().remove(levelTwo);
+                    root.getChildren().remove(levelThree);
+                    root.getChildren().remove(levelFour);
+                    AI.setSpeed(0.9);
+                    playSinglePlayer();
+                }
+            });
+                       
+        levelFour.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent event) {
+                    root.getChildren().remove(levelOne);
+                    root.getChildren().remove(levelTwo);
+                    root.getChildren().remove(levelThree);
+                    root.getChildren().remove(levelFour);
+                    playSinglePlayer();
+                }
+            });
+        
+        root.getChildren().add(levelOne);
+        root.getChildren().add(levelTwo);
+        root.getChildren().add(levelThree);
+        root.getChildren().add(levelFour);
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -148,7 +221,7 @@ public class GameWindow extends Application         {
     private void playSinglePlayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
         
-        ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
+        ball = new Ball(-400, 0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
         
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
@@ -219,7 +292,7 @@ public class GameWindow extends Application         {
     private void playMultiplayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
         
-        ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, playerTwo});
+        ball = new Ball(-400,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, playerTwo});
 
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(playerTwo.getRectangle());
