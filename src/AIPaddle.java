@@ -22,6 +22,10 @@ public class AIPaddle extends Paddle
         
     }
     
+    public void setSpeed(double m) { // multiplies the speed by a multiplier, used to set difficulty of AI.
+        movementSpeed *= m;
+    }
+    
     public void update(double[] ballPos) {
         //System.out.println(currY);
         //rec.setTranslateY(currY += 0.05);
