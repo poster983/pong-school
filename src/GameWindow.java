@@ -42,6 +42,11 @@ public class GameWindow extends Application         {
     private static StackPane root = new StackPane();
     private Scene scene = new Scene(root, 300, 250);
 
+    //Networking
+    private Socket clientSocket;
+    private BufferedReader socketIn;
+    private PrintWriter socketOut;
+
     @Override
     public void start(Stage primaryStage) {
 
@@ -393,7 +398,7 @@ public class GameWindow extends Application         {
         root.getChildren().add(hostIt);
         root.getChildren().add(connectIt);
 
-        
+        //Listens for Host Button press
         hostIt.setOnAction(new EventHandler<ActionEvent>() {
 
                 @Override
@@ -405,26 +410,57 @@ public class GameWindow extends Application         {
                 }
             });
 
+        //Listens for Connect Button press
+        connectIt.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent event) {
+                    root.getChildren().remove(hostIt);
+                    root.getChildren().remove(bigTitle);
+                    root.getChildren().remove(connectIt);
+                    multiPlayerSetupConnect();
+                }
+            });
+
     }
+
     private void multiPlayerSetupHost() {
         System.out.println("Trying to make a server...");
         //Set Sockets 
+        MultiplayerServer.call();
+
+    }
+
+    private void multiPlayerSetupConnect() {
+        System.out.println("Trying to Connect to a server...");
+        //Set Sockets 
         try {
-            ServerSocket serverSocket = new ServerSocket(1234);
-            Socket socket = serverSocket.accept();
-
-            //System.out.println(socket.toString());
-            playMultiPlayer(socket);
-
-        }  catch( Exception e )
+            clientSocket = new Socket("localhost", 1234);  //LocalHost For Now
+            socketIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //GOT FROM TIC TAC TOE
+            socketOut = new PrintWriter(clientSocket.getOutputStream(), true); //GOT FROM TIC TAC TOE
+            System.out.println("Connected");
+            TESTINGSOCKETS("Connected");
+        } catch( Exception e )
         {
             System.out.println("Error");
             e.printStackTrace();
         }
-
     }
-    //Multi player logic goes here
-    private void playMultiPlayer(Socket socket) {
+
+    private void TESTINGSOCKETS(String Message ) {
+        try {
+
+            socketOut.println(Message);
+
+        }catch( Exception e )
+        {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+    }
+
+    //Multi player LAN logic goes here
+    private void playMultiPlayerLan(Socket socket) {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
 
         root.getChildren().add(player.getRectangle());

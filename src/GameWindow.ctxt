@@ -3,6 +3,7 @@ comment0.params=primaryStage
 comment0.target=void\ start(javafx.stage.Stage)
 comment1.params=event
 comment1.target=void\ handle(javafx.event.ActionEvent)
+<<<<<<< HEAD
 comment10.params=thisPaddle
 comment10.target=javafx.scene.shape.Path\ checkCollision(Paddle)
 comment11.params=thisPaddle
@@ -19,6 +20,24 @@ comment16.params=
 comment16.target=void\ run()
 comment17.params=
 comment17.target=void\ playMultiplayer()
+=======
+comment10.params=
+comment10.target=void\ run()
+comment11.params=
+comment11.target=void\ multiPlayerSetup()
+comment12.params=event
+comment12.target=void\ handle(javafx.event.ActionEvent)
+comment13.params=event
+comment13.target=void\ handle(javafx.event.ActionEvent)
+comment14.params=
+comment14.target=void\ multiPlayerSetupHost()
+comment15.params=
+comment15.target=void\ multiPlayerSetupConnect()
+comment16.params=Message
+comment16.target=void\ TESTINGSOCKETS(java.lang.String)
+comment17.params=socket
+comment17.target=void\ playMultiPlayerLan(java.net.Socket)
+>>>>>>> MultiplayerWork
 comment18.params=event
 comment18.target=void\ handle(javafx.scene.input.KeyEvent)
 comment19.params=event
@@ -29,6 +48,7 @@ comment20.params=
 comment20.target=void\ run()
 comment21.params=
 comment21.target=void\ run()
+<<<<<<< HEAD
 comment22.params=
 comment22.target=void\ multiPlayerSetup()
 comment23.params=event
@@ -53,10 +73,27 @@ comment5.params=event
 comment5.target=void\ handle(javafx.event.ActionEvent)
 comment6.params=event
 comment6.target=void\ handle(javafx.event.ActionEvent)
+=======
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+comment4.params=thisPaddle
+comment4.target=javafx.scene.shape.Path\ checkCollision(Paddle)
+comment5.params=thisPaddle
+comment5.target=boolean\ checkEndCondition(Paddle)
+comment6.params=
+comment6.target=void\ playSinglePlayer()
+>>>>>>> MultiplayerWork
 comment7.params=event
 comment7.target=void\ handle(javafx.event.ActionEvent)
 comment8.params=event
+<<<<<<< HEAD
 comment8.target=void\ handle(javafx.event.ActionEvent)
 comment9.params=args
 comment9.target=void\ main(java.lang.String[])
 numComments=30
+=======
+comment8.target=void\ handle(javafx.scene.input.KeyEvent)
+comment9.params=
+comment9.target=void\ run()
+numComments=22
+>>>>>>> MultiplayerWork

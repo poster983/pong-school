@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=message
+comment0.target=JSONException(java.lang.String)
+comment0.text=\r\n\ Constructs\ a\ JSONException\ with\ an\ explanatory\ message.\r\n\r\n\ @param\ message\r\n\ \ \ \ \ \ \ \ \ \ \ \ Detail\ about\ the\ reason\ for\ the\ exception.\r\n
+comment1.params=message\ cause
+comment1.target=JSONException(java.lang.String,\ java.lang.Throwable)
+comment1.text=\r\n\ Constructs\ a\ JSONException\ with\ an\ explanatory\ message\ and\ cause.\r\n\ \r\n\ @param\ message\r\n\ \ \ \ \ \ \ \ \ \ \ \ Detail\ about\ the\ reason\ for\ the\ exception.\r\n\ @param\ cause\r\n\ \ \ \ \ \ \ \ \ \ \ \ The\ cause.\r\n
+comment2.params=cause
+comment2.target=JSONException(java.lang.Throwable)
+comment2.text=\r\n\ Constructs\ a\ new\ JSONException\ with\ the\ specified\ cause.\r\n\ \r\n\ @param\ cause\r\n\ \ \ \ \ \ \ \ \ \ \ \ The\ cause.\r\n
+numComments=3
