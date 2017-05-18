@@ -265,11 +265,9 @@ public class GameWindow extends Application {
 
     private void TESTINGSOCKETS(String Message ) {
         try {
-            while(true) {
-                if(socketIn.readLine().equals("HELLO")) {
-                    socketOut.println(Message);
-                }
-            }
+
+            socketOut.println(Message);
+
         }catch( Exception e )
         {
             System.out.println("Error");
