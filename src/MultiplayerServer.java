@@ -36,6 +36,10 @@ public class MultiplayerServer implements Runnable
                 SocketList[x] = serverSocket.accept();
                 if(SocketList[0] != null) {
                     x = 1;
+                    input = new BufferedReader(
+                        new InputStreamReader(SocketList[0].getInputStream()));
+                    output = new PrintWriter(SocketList[0].getOutputStream(), true);
+                    output.println("HELLO");
                     listenForIn();
                 }
                 if(SocketList[0] != null && SocketList[1] != null) {
@@ -64,7 +68,7 @@ public class MultiplayerServer implements Runnable
 
         //
     }
-    
+
     // My issle spot 
     public void listenForIn() {
         try {

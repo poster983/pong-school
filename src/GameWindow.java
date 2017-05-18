@@ -34,17 +34,16 @@ public class GameWindow extends Application {
     private static AIPaddle AI = new AIPaddle(-MAX_WINDOW_SIZE_X/2+50, 0, MAX_WINDOW_SIZE_Y, PADDLE_MOVEMENT_SPEED, "AI");
     //
     private static Ball ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
-    
+
     private static Timer timer = new Timer();
 
     private static StackPane root = new StackPane();
     private Scene scene = new Scene(root, 300, 250);
-    
+
     //Networking
     private Socket clientSocket;
     private BufferedReader socketIn;
     private PrintWriter socketOut;
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -226,9 +225,9 @@ public class GameWindow extends Application {
                     multiPlayerSetupHost();
                 }
             });
-            
-            //Listens for Connect Button press
-            connectIt.setOnAction(new EventHandler<ActionEvent>() {
+
+        //Listens for Connect Button press
+        connectIt.setOnAction(new EventHandler<ActionEvent>() {
 
                 @Override
                 public void handle(ActionEvent event) {
@@ -240,13 +239,14 @@ public class GameWindow extends Application {
             });
 
     }
+
     private void multiPlayerSetupHost() {
         System.out.println("Trying to make a server...");
         //Set Sockets 
-       MultiplayerServer.call();
+        MultiplayerServer.call();
 
     }
-    
+
     private void multiPlayerSetupConnect() {
         System.out.println("Trying to Connect to a server...");
         //Set Sockets 
@@ -262,11 +262,21 @@ public class GameWindow extends Application {
             e.printStackTrace();
         }
     }
-    
+
     private void TESTINGSOCKETS(String Message ) {
-        socketOut.println(Message);
+        try {
+            while(true) {
+                if(socketIn.readLine().equals("HELLO")) {
+                    socketOut.println(Message);
+                }
+            }
+        }catch( Exception e )
+        {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
     }
-    
+
     //Multi player LAN logic goes here
     private void playMultiPlayerLan(Socket socket) {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
