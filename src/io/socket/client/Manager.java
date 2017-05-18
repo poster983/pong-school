@@ -1,4 +1,4 @@
-package io.socket.client;
+package src.io.socket.client;
 
 import io.socket.backo.Backoff;
 import io.socket.emitter.Emitter;

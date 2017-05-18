@@ -1,6 +1,6 @@
-package io.socket.parser;
+package src.io.socket.parser;
 
-import io.socket.emitter.Emitter;
+import src.io.socket.emitter.Emitter;
 import org.json.JSONException;
 import org.json.JSONTokener;
 

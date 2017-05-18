@@ -1,4 +1,4 @@
-package io.socket.hasbinary;
+package src.io.socket.hasbinary;
 
 import org.json.JSONArray;
 import org.json.JSONException;

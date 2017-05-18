@@ -1,8 +1,8 @@
-package io.socket.parser;
+package src.io.socket.parser;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import src.org.json.JSONArray;
+import src.org.json.JSONException;
+import src.org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;

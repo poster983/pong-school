@@ -1,4 +1,4 @@
-package io.socket.client;
+package src.io.socket.client;
 
 import io.socket.emitter.Emitter;
 import io.socket.hasbinary.HasBinary;

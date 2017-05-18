@@ -1,4 +1,4 @@
-package io.socket.client;
+package src.io.socket.client;
 
 import java.net.MalformedURLException;
 import java.net.URI;
