@@ -126,24 +126,23 @@ public class Ball {
         }
         
         // check for col with bottom window border
-                if(location[1] >= (windowLimits[1]/2)-size[1]) {
+                if(location[1] >= (windowLimits[1] / 2) - size[1]) {
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[1]);
-                    velocity = new double[]{velocity[0], -1*velocity[1]};
+                    velocity = new double[]{velocity[0], -1 * velocity[1]};
                 }
 
                 // check for col with left wall
-                if(location[0] <= -1*windowLimits[0]/2) {
+                if(location[0] <= -1 * windowLimits[0] / 2) {
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[0]);
                     //velocity = new double[]{-1*velocity[0], velocity[1]};
                     Paddles[0].incScore(1);
-                    double y = Paddles[1].getCurrY();
                     ball.setTranslateX(0);
-                    ball.setTranslateY(y);
+                    ball.setTranslateY(0);
                     location[0] = 0;
-                    location[1] = y;
-                    velocity = new double[]{-1*velocity[0], -1*velocity[1]};
+                    location[1] = 0;
+                    velocity = new double[]{-1 * velocity[0], -1 * velocity[1]};
                     //System.out.println("hit");
                 }
                 // check for col with left wall QUICK TEST
@@ -154,23 +153,22 @@ public class Ball {
                 }*/
 
                 // check for col with Top window border
-                if(location[1] <= (-1*windowLimits[1]/2)+size[1]){
+                if(location[1] <= (-1 * windowLimits[1] / 2) + size[1]){
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[1]);
-                    velocity = new double[]{velocity[0], -1*velocity[1]};
+                    velocity = new double[]{velocity[0], -1 * velocity[1]};
                 }
 
                 // check for col with right window border
-                if(location[0] >= (windowLimits[0]/2)){
+                if(location[0] >= (windowLimits[0] / 2)){
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[1]);
                     Paddles[1].incScore(1);
-                    double y = Paddles[0].getCurrY();
                     ball.setTranslateX(0);
-                    ball.setTranslateY(y);
+                    ball.setTranslateY(0);
                     location[0] = 0;
-                    location[1] = y;
-                    velocity = new double[]{-1*velocity[0], -1*velocity[1]};
+                    location[1] = 0;
+                    velocity = new double[]{-1 * velocity[0], -1 * velocity[1]};
                     //velocity = new double[]{velocity[0], velocity[1]};
                 }
     }

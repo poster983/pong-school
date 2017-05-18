@@ -148,7 +148,7 @@ public class GameWindow extends Application         {
     private void playSinglePlayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
         
-        ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
+        ball = new Ball(-400, 0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, AI});
         
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(AI.getRectangle());
@@ -219,7 +219,7 @@ public class GameWindow extends Application         {
     private void playMultiplayer() {
         System.out.println(-MAX_WINDOW_SIZE_X/2);
         
-        ball = new Ball(0,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, playerTwo});
+        ball = new Ball(-400,0, MAX_WINDOW_SIZE_X, MAX_WINDOW_SIZE_Y, INITIAL_BALL_MOVEMENT_SPEED, new Paddle[]{player, playerTwo});
 
         root.getChildren().add(player.getRectangle());
         root.getChildren().add(playerTwo.getRectangle());

@@ -18,7 +18,7 @@ public class AIPaddle extends Paddle
 {
     
     public AIPaddle(int _x, int _y, int _windowLimits, double _movementSpeed, String _name) {
-        super(_x, _y, _windowLimits, _movementSpeed, _name);
+        super(_x, _y, _windowLimits, _movementSpeed, _name); //the .9 limits the speed of the AI Paddle, because it was too fast, and impossible to beat
         
     }
     
