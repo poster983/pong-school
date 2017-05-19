@@ -24,7 +24,7 @@ public class Ball {
     //for collision detection AND performance
     private Paddle[] Paddles;
     
-
+    
     private static Timer timer = new Timer();
 
     public Ball(double _startX, double _startY, int _windowLimitsX, int _windowLimitsY, double _movementSpeed, Paddle[] _paddleArray) {
@@ -93,6 +93,10 @@ public class Ball {
                 System.out.println(ballVy);
                 System.out.println("________ \n");
                 */
+                //Play crappy windows beep 
+                SoundFX.CrappyBeep();
+                
+                
                 
                 velocity = new double[]{ballVx, ballVy};
                  
@@ -118,6 +122,10 @@ public class Ball {
                 System.out.println(ballVy);
                 System.out.println("________ \n");
                 */
+               
+               //Play crappy windows beep 
+                SoundFX.CrappyBeep();
+                
                 
                 velocity = new double[]{ballVx, ballVy};
                  
@@ -130,6 +138,8 @@ public class Ball {
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[1]);
                     velocity = new double[]{velocity[0], -1 * velocity[1]};
+                    
+                    SoundFX.CrappyBeep();
                 }
 
                 // check for col with left wall
@@ -157,6 +167,8 @@ public class Ball {
                     //System.out.println(windowLimits[1]);
                     //System.out.println(location[1]);
                     velocity = new double[]{velocity[0], -1 * velocity[1]};
+                    
+                    SoundFX.CrappyBeep();
                 }
 
                 // check for col with right window border
