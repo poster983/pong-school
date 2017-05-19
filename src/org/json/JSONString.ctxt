@@ -1,5 +1,0 @@
-#BlueJ class context
-comment0.params=
-comment0.target=java.lang.String\ toJSONString()
-comment0.text=\r\n\ The\ <code>toJSONString</code>\ method\ allows\ a\ class\ to\ produce\ its\ own\ JSON\r\n\ serialization.\r\n\r\n\ @return\ A\ strictly\ syntactically\ correct\ JSON\ text.\r\n
-numComments=1

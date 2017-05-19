@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=
-comment0.target=Packet()
-comment1.params=type
-comment1.target=Packet(int)
-comment2.params=type\ data
-comment2.target=Packet(int,\ java.lang.Object)
-numComments=3

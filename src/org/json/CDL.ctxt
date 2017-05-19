@@ -1,5 +1,0 @@
-#BlueJ class context
-comment0.params=x
-comment0.target=java.lang.String\ getValue(JSONTokener)
-comment0.text=\r\n\ Get\ the\ next\ value.\ The\ value\ can\ be\ wrapped\ in\ quotes.\ The\ value\ can\r\n\ be\ empty.\r\n\ @param\ x\ A\ JSONTokener\ of\ the\ source\ text.\r\n\ @return\ The\ value\ string,\ or\ null\ if\ empty.\r\n\ @throws\ JSONException\ if\ the\ quoted\ string\ is\ badly\ formed.\r\n
-numComments=1

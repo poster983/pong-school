@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=packet
-comment0.target=Binary.DeconstructedPacket\ deconstructPacket(Packet)
-comment1.params=packet\ buffers
-comment1.target=Packet\ reconstructPacket(Packet,\ byte[][])
-comment2.params=data\ buffers
-comment2.target=java.lang.Object\ _reconstructPacket(java.lang.Object,\ byte[][])
-numComments=3
