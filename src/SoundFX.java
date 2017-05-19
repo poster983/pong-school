@@ -1,4 +1,4 @@
-package src;
+//package src;
 
 import java.io.*;
 import sun.audio.*;
@@ -15,6 +15,7 @@ public class SoundFX
     public static void CrappyBeep()
     {
         java.awt.Toolkit.getDefaultToolkit().beep();
+        System.out.println(" /007 ");
     }
     
    /*
