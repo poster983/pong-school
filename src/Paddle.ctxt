@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=_x\ _y\ _windowLimits\ _movementSpeed\ _name
+comment0.target=Paddle(int,\ int,\ int,\ double,\ java.lang.String)
+comment1.params=
+comment1.target=double\ getCurrX()
+comment10.params=_y
+comment10.target=void\ moveY(double)
+comment2.params=
+comment2.target=double\ getCurrY()
+comment3.params=
+comment3.target=double\ getWidth()
+comment4.params=
+comment4.target=double\ getHeight()
+comment5.params=inc
+comment5.target=void\ incScore(int)
+comment6.params=
+comment6.target=double\ getScore()
+comment7.params=
+comment7.target=javafx.scene.text.Text\ getScoreBd()
+comment8.params=
+comment8.target=java.lang.String\ getName()
+comment9.params=
+comment9.target=javafx.scene.shape.Rectangle\ getRectangle()
+numComments=11
