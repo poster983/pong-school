@@ -10,3 +10,4 @@ I want to try adding obstacles in the board to spice up the game
 Joseph's Stuff:
 I am going to use sockets to send movement data to each client
 I am going to create a client and server code.
+Added Beep

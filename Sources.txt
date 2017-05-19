@@ -8,3 +8,5 @@ Most From Stackoverflow (We ported it from javascript to java):
                 double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
                 double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));
 "
+
+Removed all external code 
