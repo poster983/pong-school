@@ -28,66 +28,20 @@ public class BeepThread implements Runnable{
 		millis = _millis;
 		System.out.println("Making Beep: " + id);
 	}
-	/*
-	public void run() {
-		try {
-            final Clip clip = AudioSystem.getClip();
-            AudioFormat af = clip.getFormat();
-
-            if (af.getSampleSizeInBits() != 16) {
-                System.err.println("Weird sample size.  Dunno what to do with it.");
-                return;
-            }
-
-            //System.out.println("format " + af);
-
-            int bytesPerFrame = af.getFrameSize();
-            double fps = 11025;
-            int frames = (int)(fps * (millis / 1000));
-            frames *= 4; // No idea why it wasn't lasting as long as it should.
-
-            byte[] data = new byte[frames * bytesPerFrame];
-
-            double freqFactor = (Math.PI / 2) * freq / fps;
-            double ampFactor = (1 << af.getSampleSizeInBits()) - 1;
-
-            for (int frame = 0; frame < frames; frame++) {
-                short sample = (short)(0.5 * ampFactor * Math.sin(frame * freqFactor));
-                data[(frame * bytesPerFrame) + 0] = (byte)((sample >> (1 * 8)) & 0xFF);
-                data[(frame * bytesPerFrame) + 1] = (byte)((sample >> (0 * 8)) & 0xFF);
-                data[(frame * bytesPerFrame) + 2] = (byte)((sample >> (1 * 8)) & 0xFF);
-                data[(frame * bytesPerFrame) + 3] = (byte)((sample >> (0 * 8)) & 0xFF);
-            }
-            clip.open(af, data, 0, data.length);
-
-            // This is so Clip releases its data line when done.  Otherwise at 32 clips it breaks.
-            clip.addLineListener(new LineListener() {                
-                @Override
-                public void update(LineEvent event) {
-                    if (event.getType() == LineEvent.Type.START) {
-                        Timer t = new Timer((int)millis + 1, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                clip.close();
-                                
-                            }
-                        });
-                        t.setRepeats(false);
-                        t.start();
-                    }
-                }
-            });
-            clip.start();
-          
-        } catch (LineUnavailableException ex) {
-            System.err.println(ex);
-        }
-	}
-	*/
 	
 	public void run() {
-		System.out.println("hi");
+		try {
+			beep(freq, millis);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
+	
 	public void start () {
 		//System.out.println("Beeping: " +  id );
 		if (t == null) {
@@ -99,5 +53,88 @@ public class BeepThread implements Runnable{
 	      }
 	}
 	
+	
+    public static void beep(double freq, final double millis) throws InterruptedException, LineUnavailableException {
+
+        final Clip clip = AudioSystem.getClip();
+        /**
+         * AudioFormat of the reclieved clip. Probably you can alter it
+         * someway choosing proper Line.
+         */
+        AudioFormat af = clip.getFormat();
+
+        /**
+         * We assume that encoding uses signed shorts. Probably we could
+         * make this code more generic but who cares.
+         */
+        if (af.getEncoding() != AudioFormat.Encoding.PCM_SIGNED){
+            throw new UnsupportedOperationException("Unknown encoding");
+        }
+
+        if (af.getSampleSizeInBits() != 16) {
+            System.err.println("Weird sample size.  Dunno what to do with it.");
+            return;
+        }
+
+        /**
+         * Number of bytes in a single frame
+         */
+        int bytesPerFrame = af.getFrameSize();
+        /**
+         * Number of frames per second
+         */
+        double fps = af.getFrameRate();
+        /**
+         * Number of frames during the clip .
+         */
+        int frames = (int)(fps * (millis / 1000));
+
+        /**
+         * Data
+         */
+        ByteBuffer data = ByteBuffer.allocate(frames * bytesPerFrame);
+
+        /**
+         * We will emit sinus, which needs to be scaled so it has proper
+         * frequency --- here is the scaling factor.
+         */
+        double freqFactor = (Math.PI / 2) * freq / fps;
+        /**
+         * This sinus must also be scaled so it fills short.
+         */
+        double ampFactor = Short.MAX_VALUE;
+
+        short sample;
+
+        for (int frame = 0; frame < frames; frame++) {
+            sample = (short) (ampFactor * Math.sin(frame * freqFactor));
+            data.putShort(sample);
+        }
+        clip.open(af, data.array(), 0, data.position());
+
+        // This is so Clip releases its data line when done.  Otherwise at 32 clips it breaks.
+        clip.addLineListener(new LineListener() {
+            @Override
+            public void update(LineEvent event) {
+                if (event.getType() == LineEvent.Type.START) {
+                    Timer t = new Timer((int)millis + 1, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            clip.close();
+                        }
+                    });
+                    t.setRepeats(false);
+                    t.start();
+                }
+            }
+        });
+        clip.start();
+
+        Thread.sleep((long)millis);
+
+
+
+    }
+
 	
 }

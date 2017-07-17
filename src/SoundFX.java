@@ -35,15 +35,7 @@ public class SoundFX
     }
     
     public static void BettaBeep() {
-    	try {
-			beep(500, 100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	
     }
     
     public static void checkOs() {

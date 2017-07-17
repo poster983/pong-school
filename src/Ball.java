@@ -24,7 +24,9 @@ public class Ball {
     //for collision detection AND performance
     private Paddle[] Paddles;
     
-    private BeepThread BallSound = new BeepThread("Ball Sound", 500, 100);
+    private BeepThread BallSoundPaddle = new BeepThread("Ball Sound", 50000, 200);
+    private BeepThread BallSoundWall = new BeepThread("Ball Sound", 500, 200);
+    private BeepThread BallSoundDeath = new BeepThread("Ball Sound", 100, 1000);
     
     private static Timer timer = new Timer();
 
@@ -95,8 +97,8 @@ public class Ball {
                 System.out.println("________ \n");
                 */
                 //Play crappy windows beep 
-                SoundFX.BettaBeep();
-                BallSound.start();
+               // SoundFX.BettaBeep();
+                BallSoundPaddle.start();
                 
                 
                 
@@ -127,8 +129,8 @@ public class Ball {
                
                //Play crappy windows beep 
                 //SoundFX.CrappyBeep();
-                SoundFX.BettaBeep();
-                BallSound.start();
+                //SoundFX.BettaBeep();
+                BallSoundPaddle.start();
                 
                 velocity = new double[]{ballVx, ballVy};
                  
@@ -143,8 +145,8 @@ public class Ball {
                     velocity = new double[]{velocity[0], -1 * velocity[1]};
                     
                     //SoundFX.CrappyBeep();
-                    SoundFX.BettaBeep();
-                    BallSound.start();
+                    //SoundFX.BettaBeep();
+                    BallSoundWall.start();
                 }
 
                 // check for col with left wall
@@ -159,6 +161,7 @@ public class Ball {
                     location[1] = 0;
                     velocity = new double[]{-1 * velocity[0], -1 * velocity[1]};
                     //System.out.println("hit");
+                    BallSoundDeath.start();
                 }
                 // check for col with left wall QUICK TEST
                 /*if(location[0] <= 0) {
@@ -174,8 +177,8 @@ public class Ball {
                     velocity = new double[]{velocity[0], -1 * velocity[1]};
                     
                     //SoundFX.CrappyBeep();
-                    SoundFX.BettaBeep();
-                    BallSound.start();
+                   // SoundFX.BettaBeep();
+                    BallSoundWall.start();
                 }
 
                 // check for col with right window border
@@ -189,6 +192,7 @@ public class Ball {
                     location[1] = 0;
                     velocity = new double[]{-1 * velocity[0], -1 * velocity[1]};
                     //velocity = new double[]{velocity[0], velocity[1]};
+                    BallSoundDeath.start();
                 }
     }
 
