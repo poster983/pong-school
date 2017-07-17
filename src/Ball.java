@@ -24,6 +24,7 @@ public class Ball {
     //for collision detection AND performance
     private Paddle[] Paddles;
     
+    private BeepThread BallSound = new BeepThread("Ball Sound", 500, 100);
     
     private static Timer timer = new Timer();
 
@@ -94,7 +95,8 @@ public class Ball {
                 System.out.println("________ \n");
                 */
                 //Play crappy windows beep 
-                SoundFX.CrappyBeep();
+                SoundFX.BettaBeep();
+                BallSound.start();
                 
                 
                 
@@ -124,8 +126,9 @@ public class Ball {
                 */
                
                //Play crappy windows beep 
-                SoundFX.CrappyBeep();
-                
+                //SoundFX.CrappyBeep();
+                SoundFX.BettaBeep();
+                BallSound.start();
                 
                 velocity = new double[]{ballVx, ballVy};
                  
@@ -139,7 +142,9 @@ public class Ball {
                     //System.out.println(location[1]);
                     velocity = new double[]{velocity[0], -1 * velocity[1]};
                     
-                    SoundFX.CrappyBeep();
+                    //SoundFX.CrappyBeep();
+                    SoundFX.BettaBeep();
+                    BallSound.start();
                 }
 
                 // check for col with left wall
@@ -168,7 +173,9 @@ public class Ball {
                     //System.out.println(location[1]);
                     velocity = new double[]{velocity[0], -1 * velocity[1]};
                     
-                    SoundFX.CrappyBeep();
+                    //SoundFX.CrappyBeep();
+                    SoundFX.BettaBeep();
+                    BallSound.start();
                 }
 
                 // check for col with right window border
