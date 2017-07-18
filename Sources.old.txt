@@ -1,0 +1,12 @@
+Tic Tac Toe Game fom github for socket example
+socket.io included but not used 
+
+Most From Stackoverflow (We ported it from javascript to java): 
+"double relativeIntersectY = (Paddles[0].getCurrY()+(Paddles[0].getHeight()/2)) - location[1];
+                double normalizedRelativeIntersectionY = (relativeIntersectY/(Paddles[0].getHeight()/2));
+                double bounceAngle = normalizedRelativeIntersectionY * 75;
+                double ballVx = (((movementSpeed)*Math.cos(bounceAngle)) );
+                double ballVy = (((movementSpeed)*-Math.sin(bounceAngle)));
+"
+
+Removed all external code 
