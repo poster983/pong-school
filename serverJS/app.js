@@ -4,11 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var socket_io    = require( "socket.io" );
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+// Socket.io
+var io           = socket_io();
+app.io           = io;
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +35,11 @@ app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+});
+
+// socket.io
+io.on('connection', function(socket){
+  console.log('a user connected');
 });
 
 // error handler

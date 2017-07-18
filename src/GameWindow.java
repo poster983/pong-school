@@ -43,9 +43,7 @@ public class GameWindow extends Application         {
     private Scene scene = new Scene(root, 300, 250);
 
     //Networking
-    private Socket clientSocket;
-    private BufferedReader socketIn;
-    private PrintWriter socketOut;
+    
 
     @Override
     public void start(Stage primaryStage) {
@@ -432,7 +430,7 @@ public class GameWindow extends Application         {
     }
 
     private void multiPlayerSetupConnect() {
-        System.out.println("Trying to Connect to a server...");
+        /*System.out.println("Trying to Connect to a server...");
         //Set Sockets 
         try {
             clientSocket = new Socket("localhost", 1234);  //LocalHost For Now
@@ -444,11 +442,11 @@ public class GameWindow extends Application         {
         {
             System.out.println("Error");
             e.printStackTrace();
-        }
+        }*/
     }
 
     private void TESTINGSOCKETS(String Message ) {
-        try {
+        /*try {
 
             socketOut.println(Message);
 
@@ -456,7 +454,7 @@ public class GameWindow extends Application         {
         {
             System.out.println("Error");
             e.printStackTrace();
-        }
+        }*/
     }
 
     //Multi player LAN logic goes here
